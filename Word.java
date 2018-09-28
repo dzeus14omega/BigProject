@@ -1,6 +1,8 @@
+package MyDictionary;
+
 public class Word {
-	String word_target;
-	String Word_explain;
+	private String word_target;
+	private String word_explain;
 	public String getWord_target() {
 		return word_target;
 	}
@@ -8,15 +10,19 @@ public class Word {
 		this.word_target = word_target;
 	}
 	public String getWord_explain() {
-		return Word_explain;
+		return word_explain;
 	}
 	public void setWord_explain(String word_explain) {
-		Word_explain = word_explain;
-	}
-	public Word(String word_target, String word_explain) {
-		super();
-		this.word_target = word_target;
-		Word_explain = word_explain;
+		this.word_explain = word_explain;
 	}
 	
+	//Constructor
+	Word(String word,String meaning){
+		this.word_target = word;
+		this.word_explain = meaning;
+	}
+	Word(){
+		this.word_explain = "null";
+		this.word_target = "null";
+	}
 }
