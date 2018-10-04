@@ -1,47 +1,35 @@
-package com.company;
+package BigProject;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
-import java.util.Set;
+import java.util.ArrayList;
 
-public class DictionaryCommandline {
-    private DictionaryManagement myDicManger ;
-
-    public DictionaryCommandline(){
-    	this.myDicManger = new DictionaryManagement();
-    }
-    public DictionaryCommandline(DictionaryManagement x) {
-        this.myDicManger = x ;
-    }
-
-    public void showAllWords(){
-        System.out.println("No  | English       | Vietnamese ") ;
-        
-        HashMap<String, String> myArr = this.myDicManger.getMyDicData() ;
-        Set<Entry<String, String>> set = myArr.entrySet();
-        
-        // Lay mot iterator
-        Iterator<Entry<String, String>> i = set.iterator();
-        
-        int j=1;
-        
-        // Hien thi cac phan tu
-        while(i.hasNext()) {
-           Entry<String, String> me = i.next();
-           System.out.println(j + "\t| "+ me.getKey() + "\t\t\t| "+ me.getValue());
-           j++;
-        }
-        
-        
-        
-    }
-	public void dictionaryBasic() {
-		// TODO Auto-generated method stub
-		this.myDicManger.insertFromCommandline();
-		this.showAllWords();
-		
+public class DictionaryCommandline{
+	private Dictionary myDic;
+	
+	public Dictionary getMyDic() {
+		return myDic;
 	}
 
-
+	public void setMyDic(Dictionary myDic) {
+		this.myDic = myDic;
+	}
+	
+	public   DictionaryCommandline() {
+		this.myDic = new Dictionary();
+		
+	}
+	public DictionaryCommandline(DictionaryManagement arr) {
+		super();
+		this.myDic = arr.myDictionary;
+	}
+	
+	public void showAllWords()
+	{
+		System.out.println("No\t| English\t\t Vietnamese");
+		for(int i=0;i<myDic.getListWord().size();i++)
+		{
+			int number = i + 1;
+			System.out.println(number + "\t|" + myDic.getListWord().get(i).getWord_target() + "\t\t\t|" + myDic.getListWord().get(i).getWord_explain() );
+		}
+		
+	}
 }

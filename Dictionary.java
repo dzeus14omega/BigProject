@@ -1,24 +1,29 @@
-package com.company;
+package BigProject;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Dictionary {
-    private HashMap<String, String> listWord;
-    
-    public Dictionary() {
-    	this.listWord = new HashMap<>();
-    }
+public class Dictionary  {
+	private List<Word> listWord;
 
-    public Dictionary(HashMap<String, String> x) {
-        this.listWord = x;
-    }
+	public void add(Word newWord) {
+		// TODO Auto-generated method stub
+		this.listWord.add(newWord);
+	}
 
-    public HashMap<String, String> getListWord() {
-        return this.listWord;
-    }
+	public List<Word> getListWord() {
+		return listWord;
+	}
 
-    public void addNewWord (Word newWord){
-    	
-    	this.listWord.put(newWord.getWord_target(), newWord.getWord_explain());
-    }
+	public void setListWord(List<Word> listWord) {
+		this.listWord = listWord;
+	}
+
+	public Dictionary() {
+		
+		this.listWord = new ArrayList<>();
+	}
+	
+	 
+	
 }

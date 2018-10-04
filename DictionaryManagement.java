@@ -1,38 +1,39 @@
-package com.company;
+package BigProject;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DictionaryManagement {
-    private Dictionary myDic;
+public class  DictionaryManagement  {
+	
+	public Dictionary myDictionary ;
+	
+	public DictionaryManagement() {
+		super();
+		this.myDictionary = new Dictionary();
+	}
 
-    public DictionaryManagement() {
-        this.myDic = new Dictionary();
-    }
+	public void insertFromCommandline()
+	{
+		 System.out.println("Enter number of words");
+		 Scanner cin = new Scanner(System.in);
+		 int n = cin.nextInt(); //nhap vao so luong tu
+		 String e = cin.nextLine();
+		 for(int i=0;i<n;i++)
+		 {
+			
+			 String a , b;
+			 System.out.println(" Enter English word : ");
+			 a=cin.nextLine();
+			 System.out.println(" Enter VietNam word : ");
+			 b=cin.nextLine();
+			 Word newWord = new Word(a,b); // tao class word co 2 tu
+			 myDictionary.add(newWord);
+			 
+		 }
+	}
 
-    public HashMap<String, String> getMyDicData() {
-        return this.myDic.getListWord();
-    }
-
-    public void insertFromCommandline() {
-        System.out.println("Enter number of words");
-        Scanner myScanner = new Scanner(System.in);
-
-        int numberWord = myScanner.nextInt();
-        String t = myScanner.nextLine() ;
-        for (int i=0; i<numberWord; i++)
-        {
-            String eWord, vWord ;
-            System.out.println("Enter English word: ");
-            eWord = myScanner.nextLine() ;
-
-            System.out.println("Enter Vietnamese word: ");
-            vWord = myScanner.nextLine() ;
-
-            Word newWord = new Word(eWord, vWord);
-            this.myDic.addNewWord(newWord);
-        }
-        myScanner.close();
-    }
-    
+	public ArrayList<Word> getListWord() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
