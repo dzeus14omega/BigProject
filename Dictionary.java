@@ -1,61 +1,38 @@
-<<<<<<< HEAD
-package BigProject;
+package testSwing;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dictionary  {
-	private List<Word> listWord;
+public class Dictionary {
+    private List<Word> listWord;
+    private double N;
+    
+    
+    //Constructor
+    public Dictionary() {
+        this.listWord = new ArrayList<>() ;
+    	this.N=0;
+    }
+    public Dictionary(List<Word> _listWord) {
+        this.listWord = _listWord;
+    }
+    
+    //getter/settter
+    public List<Word> getListWord() {
+        return this.listWord;
+    }
 
-	public void add(Word newWord) {
-		// TODO Auto-generated method stub
-		this.listWord.add(newWord);
+    public void addNewWord (Word newWord){
+        this.listWord.add(newWord);
+        this.N++;
+    }
+	public double size() {
+		return N;
+	}
+	public void setN(double a) {
+		this.N = a;
 	}
 
-	public List<Word> getListWord() {
-		return listWord;
-	}
-
-	public void setListWord(List<Word> listWord) {
-		this.listWord = listWord;
-	}
-
-	public Dictionary() {
-		
-		this.listWord = new ArrayList<>();
-	}
-	
-	 
-	
-}
-=======
-package BigProject;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class Dictionary  {
-	private List<Word> listWord;
-
-	public void add(Word newWord) {
-		// TODO Auto-generated method stub
-		this.listWord.add(newWord);
-	}
-
-	public List<Word> getListWord() {
-		return listWord;
-	}
-
-	public void setListWord(List<Word> listWord) {
-		this.listWord = listWord;
-	}
-
-	public Dictionary() {
-		
-		this.listWord = new ArrayList<>();
-	}
-	
-	 
 	
 }
->>>>>>> 2cf76a6f94735222a6989ef0e9c86c3d7b7e130c

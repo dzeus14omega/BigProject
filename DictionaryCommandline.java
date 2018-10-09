@@ -1,86 +1,72 @@
-<<<<<<< HEAD
-package BigProject;
+package testSwing;
 
 import java.util.ArrayList;
-import java.io.DataOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-public class DictionaryCommandline{
-	private DictionaryManagement myDic;
-	
-	public DictionaryManagement getMyDic() {
-		return myDic;
-	}
+import java.util.List;
+import java.util.Scanner;
 
-	public void setMyDic(DictionaryManagement mD) {
-		this.myDic = mD;
-	}
-	
-	public   DictionaryCommandline() {
-		this.myDic = new DictionaryManagement();
-		
-	}
-	public DictionaryCommandline(DictionaryManagement arr) {
-		super();
-		this.myDic = arr;
-	}
-	
-	public void showAllWords()
-	{
-		System.out.println("No\t| English\t\t Vietnamese");
-		for(int i=0;i<myDic.myDictionary.getListWord().size();i++)
-		{
-			int number = i + 1;
-			System.out.println(number + "\t|" + myDic.myDictionary.getListWord().get(i).getWord_target() + "\t\t\t|" + myDic.myDictionary.getListWord().get(i).getWord_explain() );
-		}
-		
-	}
-	public void dictionaryBasic(){
-		this.myDic.insertFromCommandline();
-		this.showAllWords();
-	}
-	public void dictionaryAdvanced()
-	{
-		this.myDic.insertFromFile();
-		this.showAllWords();
-		
-	}
-	
+public class DictionaryCommandline extends DictionaryManagement {
+    
+    
+    //Constructor
+    public DictionaryCommandline(){
+    	super();
+    }
+    
+    //function
+    
+    public void showAllWords(){
+        System.out.println("No\t| English\t\t\t| Vietnamese ") ;
+        List<Word> myArr = this.getMyDicData() ;
+
+        for (int i=0; i<myArr.size() ;i++)
+        {
+            Word word = myArr.get(i);
+            int number = i+1;
+            System.out.println(number+ "\t| " + word.getWord_target() + "\t\t\t | " + word.getWord_explain());
+        }
+    }
+
+    public void dictionaryBasic(){
+    	this.insertFromCommandline();
+    	this.showAllWords();
+    }
+    public void dictionaryAdvanced() {
+    	this.insertFromCommandline();
+    	this.SortDictionary();
+    	this.showAllWords();
+    	this.dictionaryLookup();
+    }
+    public void dictionaryAdd() {
+    	this.nWordFromCml();
+    	this.showAllWords();
+    }
+    
+    public  int[] dictionarySeacher() {
+    	Scanner myScanner = new Scanner(System.in);
+    	String tmp =  myScanner.nextLine();
+    	int k = this.dictionaryLookup(tmp);						//su dung DictionaryLookup-> cai tien dictionaryLookup de tim kiem nhanh hon
+    	if(k==-1) {
+    		k++;
+    	}
+    	int seachlist[] = new int[20];
+    	int l = tmp.length();
+    	int count=0;
+    	while(k < this.getMyDicData().size()) {
+    		if(this.getMyDicData().get(k).getWord_target().length() < l) {
+    			continue;
+    		}
+    		if(this.getMyDicData().get(k).getWord_target().substring(0, l).equals(tmp)) {
+    			seachlist[count] = k;
+    			count++;
+    		}
+    		k+=1;
+    	}
+    	
+    	return seachlist;
+    }
+    
+    
+    
+    
+    
 }
-=======
-package BigProject;
-
-import java.util.ArrayList;
-
-public class DictionaryCommandline{
-	private Dictionary myDic;
-	
-	public Dictionary getMyDic() {
-		return myDic;
-	}
-
-	public void setMyDic(Dictionary myDic) {
-		this.myDic = myDic;
-	}
-	
-	public   DictionaryCommandline() {
-		this.myDic = new Dictionary();
-		
-	}
-	public DictionaryCommandline(DictionaryManagement arr) {
-		super();
-		this.myDic = arr.myDictionary;
-	}
-	
-	public void showAllWords()
-	{
-		System.out.println("No\t| English\t\t Vietnamese");
-		for(int i=0;i<myDic.getListWord().size();i++)
-		{
-			int number = i + 1;
-			System.out.println(number + "\t|" + myDic.getListWord().get(i).getWord_target() + "\t\t\t|" + myDic.getListWord().get(i).getWord_explain() );
-		}
-		
-	}
-}
->>>>>>> 2cf76a6f94735222a6989ef0e9c86c3d7b7e130c
