@@ -3,7 +3,11 @@ package testSwing;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Array;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -68,7 +72,41 @@ public class DictionaryManagement {
         }
     }
     
-
+// insertFromFile nang cao
+    public void insertFromFileNangCao() throws IOException{
+		String fileName = "C:\\Users\\diepv\\eclipse-workspace\\Bigpro\\dictionaries.txt";
+		String content = new String(Files.readAllBytes(Paths.get(fileName)),
+		        StandardCharsets.UTF_8);//đưa về chuẩn utf-8
+		int n = 0,m = 0;
+		//content);
+		String a = new String();
+		String b = new String();
+		for(int i=0 ; i<content.length();i++)
+		{
+			if(content.charAt(i)=='@')
+			{
+				n=i+1;
+				
+			}
+	
+			 if(content.charAt(i)==' '&&content.charAt(i+1)=='/')
+			{
+				m = i;
+				a = (content.substring(n, m));
+				//System.out.println(a);
+			}
+			 if( content.charAt(i)=='\n' && content.charAt(i+1)=='@' ) {
+				 b = content.substring(m,i);
+				 //System.out.println(b);
+				
+			}	
+			 
+			 Word w = new Word(a,b);
+			 this.myDic.addNewWord(w);
+			 
+		}
+	}
+    
     
     //tra cuu phien ban so cap
     //----tra tu nhap lieu

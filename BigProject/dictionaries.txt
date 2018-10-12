@@ -1,0 +1,10 @@
+dog	cho
+house	nha
+book	sach
+mountain	nui
+rock	dat
+water	nuoc
+air	khi
+balloon	bong bay
+map ban	do
+screen	man hinh
