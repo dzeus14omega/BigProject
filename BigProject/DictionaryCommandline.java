@@ -1,5 +1,6 @@
 package testSwing;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,26 +16,30 @@ public class DictionaryCommandline extends DictionaryManagement {
     //function
     
     public void showAllWords(){
-        System.out.println("No\t| English\t\t\t| Vietnamese ") ;
+        System.out.println("No\t| English\t\t Vietnamese ") ;
         List<Word> myArr = this.getMyDicData() ;
 
         for (int i=0; i<myArr.size() ;i++)
         {
             Word word = myArr.get(i);
             int number = i+1;
-            System.out.println(number+ "\t| " + word.getWord_target() + "\t\t\t | " + word.getWord_explain());
+            System.out.println(number+ "\t| " + word.getWord_target() + "\t\t\t|" + word.getWord_explain());
         }
     }
+   
 
     public void dictionaryBasic(){
     	this.insertFromCommandline();
     	this.showAllWords();
     }
-    public void dictionaryAdvanced() {
+    public void dictionaryAdvanced() throws IOException {
     	this.insertFromCommandline();
-    	this.SortDictionary();
+    	//this.SortDictionary();
+    	this.dictionaryExportToFile();
+    	//this.insertFromFile();
+    	//this.insertFromFileNangCao();
     	this.showAllWords();
-    	this.dictionaryLookup();
+    	//this.dictionaryLookup();
     }
     public void dictionaryAdd() {
     	this.nWordFromCml();
