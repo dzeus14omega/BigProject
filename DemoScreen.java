@@ -1,4 +1,4 @@
-package testSwing;
+package sourceCode;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -28,6 +28,10 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class DemoScreen extends JFrame {
 
@@ -41,7 +45,7 @@ public class DemoScreen extends JFrame {
 	 * Create the frame.
 	 */
 	public DemoScreen(DictionaryCommandline dataDict) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Admin\\eclipse-workspace\\testSwing\\texture\\dict2.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\MyDict\\dict2.png"));
 		setTitle("MyDictionary");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 700);
@@ -53,7 +57,7 @@ public class DemoScreen extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("Definition");
 		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Admin\\eclipse-workspace\\testSwing\\tt1.jpg"));
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\MyDict\\tt1.jpg"));
 		lblNewLabel_1.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 20));
 		lblNewLabel_1.setBounds(323, 57, 174, 32);
 		contentPane.add(lblNewLabel_1);
@@ -68,41 +72,67 @@ public class DemoScreen extends JFrame {
 		
 		JTextArea textArea1 = new JTextArea();
 		textArea1.setRows(8);
-		textArea1.setFont(new Font("Arial", Font.PLAIN, 18));
+		textArea1.setFont(new Font("Calibri", Font.PLAIN, 18));
 		textArea1.setEditable(false);
 		textArea1.setBounds(311, 92, 471, 548);
 		contentPane.add(textArea1);
-		
-		JTextArea textArea2 = new JTextArea();
-		textArea2.setBounds(22, 92, 262, 548);
-		contentPane.add(textArea2);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Admin\\eclipse-workspace\\testSwing\\texture\\a1.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\MyDict\\a1.jpg"));
 		lblNewLabel.setForeground(SystemColor.activeCaption);
 		lblNewLabel.setBounds(311, 0, 471, 92);
 		contentPane.add(lblNewLabel);
 		
+		JList<String> list1 = new JList();
+		list1.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String tmp = (String)list1.getSelectedValue();
+				textField1.setText(tmp);
+			}
+		});
+		list1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		list1.setBounds(22, 92, 262, 548);
+		contentPane.add(list1);
+		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon("C:\\Users\\Admin\\eclipse-workspace\\testSwing\\texture\\images1.jpg"));
+		label_1.setIcon(new ImageIcon("C:\\MyDict\\images1.jpg"));
 		label_1.setBounds(0, 92, 311, 561);
 		contentPane.add(label_1);
 		
 		
 		JButton btnTra = new JButton("");
-		btnTra.setIcon(new ImageIcon("C:\\Users\\Admin\\eclipse-workspace\\testSwing\\texture\\kinhlup3.png"));
+		btnTra.setIcon(new ImageIcon("C:\\MyDict\\kinhlup3.png"));
 		btnTra.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
 		btnTra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String word = textField1.getText();
+//				textField1.setText(word);
+				int[] indexWSearch = dataDict.dictionarySeacher(word);
+				String[] arrWSearch = new String[indexWSearch.length];
+				for(int i=0;i<arrWSearch.length;i++) {
+					arrWSearch[i] = dataDict.getMyDicData().get(indexWSearch[i]).getWord_target();
+				}
+				list1.setModel(new AbstractListModel() {
+					String[] values = arrWSearch;
+					public int getSize() {
+						return values.length;
+					}
+					public Object getElementAt(int index) {
+						return values[index];
+					}
+				});
 				textArea1.setText(dataDict.Lookup(word));
 			}
 		});
+		
+		
+		
 		btnTra.setBounds(251, 60, 33, 32);
 		contentPane.add(btnTra);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\Admin\\eclipse-workspace\\testSwing\\texture\\a2.jpg"));
+		label.setIcon(new ImageIcon("C:\\MyDict\\a2.jpg"));
 		label.setBounds(0, 0, 311, 92);
 		contentPane.add(label);
-		contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblNewLabel_1, textField1, textArea1, textArea2, btnTra, lblNewLabel, label, label_1}));
+		contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblNewLabel_1, textField1, textArea1, btnTra, lblNewLabel, label, label_1}));
 	}
 }

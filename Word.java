@@ -1,4 +1,4 @@
-package testSwing;
+package sourceCode;
 
 public class Word  implements Comparable<Word>{
     private String word_target;

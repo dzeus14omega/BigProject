@@ -1,12 +1,10 @@
-package testSwing;
+package sourceCode;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -30,7 +28,7 @@ public class DictionaryManagement {
     }
 
     
-    //nhập từ hiện tại
+    //functions
     public void insertFromCommandline() {
         System.out.println("Enter number of words");
         Scanner myScanner = new Scanner(System.in);
@@ -51,10 +49,10 @@ public class DictionaryManagement {
             
         }
     }
-    //cai tien lan 1
+    //cai tien lan 1 - nhap file tu tao
     public void  insertFromFile(){
         try{
-            File inFile = new File("dictionaries.txt");
+            File inFile = new File("C:\\MyDict\\dictionaries.txt");
             if(!inFile.exists()) {
             	System.out.println("Error!");
             	return;
@@ -65,62 +63,75 @@ public class DictionaryManagement {
             
             String line;
             while ((line= reader.readLine()) !=null){
-                String [] a= line.split("\t");
-                Word word = new Word(a[0],a[1]);
+                String [] sepa= line.split("\t");
+                Word word = new Word(sepa[0],sepa[1]);
                 myDic.addNewWord(word);
             }
             reader.close();
+            System.out.println("Open file complete!");
         }
         catch (Exception e){
         }
     }
     
-// insertFromFile nang cao
-    public void insertFromFileNangCao() throws IOException{
-		String fileName = "dictionaries.txt";
-		String content = new String(Files.readAllBytes(Paths.get(fileName)),StandardCharsets.UTF_8);//đưa về chuẩn utf-8
-		int n = 0,m = 0;
-		for(int i=0 ; i<content.length();i++)
-		{
-			String a = new String();
-			String b = new String();
-			if(content.charAt(i)=='@')
-			{
-				n=i+1;
-				
-			}
-	
-			 if(content.charAt(i)==' ' && content.charAt(i+1)=='/')
-			{
-				m = i;
-				a = (content.substring(n, m));
-				//System.out.println(a);
-			}
-			 if( content.charAt(i)=='\n' && content.charAt(i+1)=='@' ) {
-				 b = content.substring(m,i);
-				 //System.out.println(b);
-				 Word w = new Word(a,b);
-				 this.myDic.addNewWord(w);
-			}	
-		}
+    //nhap file tu file dien tu Ho Ngoc Duc
+//    public void insertFromFileHARD() throws IOException {
+//		String fileName = "dict";
+//		String content = new String(Files.readAllBytes(Paths.get(fileName)),StandardCharsets.UTF_8);
+//		int n = 0,m = 0;
+//		
+//		String a = new String();
+//		String b = new String();
+//		for(int i=0 ; i<content.length();i++)
+//		{
+//			if(content.charAt(i)=='@')
+//			{
+//				n=i+1;
+//			}
+//	
+//			if(content.charAt(i)==' '&&content.charAt(i+1)=='/')
+//			{
+//				m = i;
+//				a = (content.substring(n, m));
+//				//System.out.println(a);
+//			}
+//			if( content.charAt(i)=='\n' && content.charAt(i+1)=='@' ) {
+//				 b = content.substring(m,i);
+//				 //System.out.println(b);
+//				 	
+//			}
+//			
+//			Word tmp = new Word(a, b);
+//			this.myDic.addNewWord(tmp);
+//		}
+//	}
+ // xuất dữ liệu từ điển hiện tại ra files
+	public void dictionaryExportToFile() {
+	 try {
+	         FileWriter file =new FileWriter("C:\\MyDict\\dictionaries.txt");
+	        for(int i=0;i<getMyDicData().size();i++)
+	        {
+	            file.write(getMyDicData().get(i).getWord_target() + "\t" + getMyDicData().get(i).getWord_explain()+"\n");
+	        }
+	        file.close();
+	        System.out.println("Save complete!");
+	    }
+	 catch (Exception e) {
+		// TODO: handle exception
 	}
-    // xuất dữ liệu từ điển hiện tại ra files
-    	public void dictionaryExportToFile() {
-		 try {
-		         FileWriter file =new FileWriter("dictionaries.txt");
-		        for(int i=0;i<getMyDicData().size();i++)
-		        {
-		            file.write(getMyDicData().get(i).getWord_target() + "\t" + getMyDicData().get(i).getWord_explain()+"\n");
-		        }
-		        file.close();
-		    }
-		 catch (Exception e) {
-			// TODO: handle exception
-		}
-		   
-		           
-		}
-	 
+	   
+	           
+	}
+		
+		
+		
+         		
+
+    
+    
+    
+    
+    
     //tra cuu phien ban so cap
     //----tra tu nhap lieu
     public void dictionaryLookup() {
@@ -146,6 +157,7 @@ public class DictionaryManagement {
 		return -1;
     	
     }
+  //----Ham tim tu truyen vao bien (mo rong cho DemoScreen)
     public String Lookup(String fword) {
     	for(int i=0;i<this.getMyDicData().size();i++) {
     		if(fword.equals(this.getMyDicData().get(i).getWord_target())) {
@@ -204,5 +216,8 @@ public class DictionaryManagement {
     	this.SortDictionary();
     	System.out.println("Them tu thanh cong!");
     }
+
+	
+    
     
 }
