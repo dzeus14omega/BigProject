@@ -22,20 +22,10 @@ public class Main {
         myProgram.showAllWords();
         
         
-        myProgram.dictionaryAdd();
+//        myProgram.dictionaryAdd();
         myProgram.dictionaryExportToFile();
-        myProgram.dictionaryLookup();
-        myProgram.dictionarySeacher();
-        
-//        int[] indexWSearch = myProgram.dictionarySeacher("tra");
-//        System.out.println(indexWSearch.length);
-//		String[] arrWSearch = new String[indexWSearch.length];
-//		for(int i=0;i<arrWSearch.length;i++) {
-//			arrWSearch[i] = myProgram.getMyDicData().get(indexWSearch[i]).getWord_target();
-//		}
-//        for(int i=0;i<arrWSearch.length;i++) {
-//        	System.out.println(arrWSearch[i]);
-//        }
+//        myProgram.dictionaryLookup();
+//        myProgram.dictionarySeacher();
         
         
         /**

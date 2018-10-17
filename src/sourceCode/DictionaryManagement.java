@@ -1,15 +1,14 @@
 package sourceCode;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -34,7 +33,6 @@ public class DictionaryManagement {
         Scanner myScanner = new Scanner(System.in);
 
         int numberWord = myScanner.nextInt();
-        String t = myScanner.nextLine() ;
         for (int i=0; i<numberWord; i++)
         {
             String eWord, vWord ;
@@ -48,18 +46,32 @@ public class DictionaryManagement {
             myDic.addNewWord(newWord);
             
         }
+        myScanner.close();
     }
-    //cai tien lan 1 - nhap file tu tao
-    public void  insertFromFile(){
-        try{
-            File inFile = new File("C:\\MyDict\\dictionaries.txt");
-            if(!inFile.exists()) {
-            	System.out.println("Error!");
-            	return;
+    
+    public  void insert_FromFile() throws IOException {
+        if(this.myDic.getListWord().isEmpty()==true){        
+            InputStream input = new FileInputStream("C:\\MyDictionary\\Dictionaries.txt");
+            Scanner sc = new Scanner(new InputStreamReader(input)).useDelimiter("\\s*\t\\s*");
+            while (sc.hasNext()) {
+                String a = sc.next();
+                String v = sc.nextLine();
+                v = v.substring(1);
+                this.myDic.addNewWord(new Word(a, v));
             }
-            FileReader fileReader = new FileReader(inFile);
-            BufferedReader reader = new BufferedReader(fileReader);
-            
+            sc.close();
+        }
+    }
+    
+    
+    
+    //cai tien lan 1 - nhap file tu tao
+    public void  insertFromFile() throws IOException{
+        
+            File inFile = new File("C:\\MyDictionary\\Dictionaries.txt");
+            FileInputStream fileTmp = new FileInputStream(inFile);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fileTmp, "UTF8"));
+            reader.readLine();
             
             String line;
             while ((line= reader.readLine()) !=null){
@@ -69,9 +81,7 @@ public class DictionaryManagement {
             }
             reader.close();
             System.out.println("Open file complete!");
-        }
-        catch (Exception e){
-        }
+        
     }
     
     //nhap file tu file dien tu Ho Ngoc Duc
@@ -106,21 +116,17 @@ public class DictionaryManagement {
 //		}
 //	}
  // xuất dữ liệu từ điển hiện tại ra files
-	public void dictionaryExportToFile() {
-	 try {
-	         FileWriter file =new FileWriter("C:\\MyDict\\dictionaries.txt");
-	        for(int i=0;i<getMyDicData().size();i++)
-	        {
-	            file.write(getMyDicData().get(i).getWord_target() + "\t" + getMyDicData().get(i).getWord_explain()+"\n");
-	        }
-	        file.close();
-	        System.out.println("Save complete!");
-	    }
-	 catch (Exception e) {
-		// TODO: handle exception
-	}
-	   
-	           
+	public void dictionaryExportToFile() throws IOException {
+		File Fout = new File("dictionary.txt");
+		FileOutputStream fileTmp = new FileOutputStream(Fout);
+		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fileTmp, "UTF8"));
+		writer.write("");
+		
+		for(int i=0;i<this.myDic.size();i++) {
+			writer.write(this.myDic.getListWord().get(i).getWord_target() + "\t");
+			writer.write(this.myDic.getListWord().get(i).getWord_explain() + "\n");
+		}
+	    writer.close();
 	}
 		
 		
@@ -205,6 +211,7 @@ public class DictionaryManagement {
     	int i = this.dictionaryLookup(tmp);
     	if(i!=-1) {
     		System.out.println("Tu da co trong tu dien");
+    		myScanner.close();
     		return;
     	}
     	
@@ -215,6 +222,7 @@ public class DictionaryManagement {
     	
     	this.SortDictionary();
     	System.out.println("Them tu thanh cong!");
+    	myScanner.close();
     }
 
 	

@@ -1,11 +1,13 @@
 package sourceCode;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
+
+
 public class DictionaryCommandline extends DictionaryManagement {
-    
+	
     
     //Constructor
     public DictionaryCommandline(){
@@ -78,7 +80,7 @@ public class DictionaryCommandline extends DictionaryManagement {
     	if(k==-1) {
     		k++;
     	}
-    	int seachlistTmp[] = new int[20];
+    	int seachlistTmp[] = new int[40];
     	int l = tmp.length();
     	int count=0;
     	while(k < this.getMyDicData().size()) {
