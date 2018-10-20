@@ -1,0 +1,33 @@
+air	khi
+balloon	bong bay
+book	sach
+dictionary	tu dien
+different	khac nhau
+dimension	coi hu khong
+dinosaur	khung long
+diploma	bang cap
+direct	trực diện
+direction	sự thẳng hàng
+directly	mot cach thang hang
+dog	con chó
+house	nhà
+map	bản đồ
+mountain	ngọn núi
+rock	dat
+screen	man hinh
+water	nuoc
+walk	di b0
+swim	boi
+divine	chia
+deep	sau
+define	dinh nghia
+definately	chac chan
+defuse	go bom
+delay	tri hoan
+desert	hoang mac
+dam	dap
+delicious	ngon mieng
+door	cua ra vao
+dynamic	bung no
+degree	bang cap
+defence	phong thu

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="texture"/>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/tmp Big Proj1/jar/cmu_time_awb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/tmp Big Proj1/jar/cmu_us_kal.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/tmp Big Proj1/jar/cmudict04.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/tmp Big Proj1/jar/cmulex.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/tmp Big Proj1/jar/cmutimelex.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/tmp Big Proj1/jar/en_us.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/tmp Big Proj1/jar/freetts.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/tmp Big Proj1/jar/freetts-jsapi10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/tmp Big Proj1/jar/mbrola.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/tmp Big Proj1/json-simple.jar"/>
+	<classpathentry kind="lib" path="D:/file download temp/jackson-mapper-asl-1.5.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
