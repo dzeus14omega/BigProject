@@ -2,7 +2,7 @@ package sourceCode;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
+import com.darkprograms.speech.translator.GoogleTranslate;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -42,6 +42,8 @@ import java.io.*;
 import com.sun.speech.freetts.*;
 import javax.swing.ListSelectionModel;
 import javax.swing.JMenu;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 
 
@@ -63,8 +65,9 @@ public class DemoScreen extends JFrame {
 	 */
 	
 	public DemoScreen(DictionaryCommandline _dataDict) {
+	
 		this.dataDict = _dataDict;
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\MyDictionary\\dict2.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("dict2.png"));     //"C:\\MyDictionary\\dict2.png"
 		setTitle("MyDictionary");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 700);
@@ -74,9 +77,9 @@ public class DemoScreen extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Definition");
+		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\MyDictionary\\tt1.jpg"));
+		lblNewLabel_1.setIcon(new ImageIcon("tt1.jpg"));    //C:\\MyDictionary\\tt1.jpg"
 		lblNewLabel_1.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 20));
 		lblNewLabel_1.setBounds(311, 51, 174, 44);
 		contentPane.add(lblNewLabel_1);
@@ -116,14 +119,14 @@ public class DemoScreen extends JFrame {
 		list1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		list1.setBounds(22, 92, 262, 548);
 		JScrollPane scrollPane = new JScrollPane(list1);
-		scrollPane.setBounds(22, 92, 262, 497);
+		scrollPane.setBounds(22, 92, 262, 510);
 		
 		contentPane.add(scrollPane);
 		
 		
 		JButton btnTra = new JButton("");
 		btnTra.setToolTipText("Search");
-		btnTra.setIcon(new ImageIcon("C:\\MyDictionary\\kinhlup3.png"));
+		btnTra.setIcon(new ImageIcon("kinhlup3.png"));//C:\\MyDictionary\\kinhlup3.png
 		btnTra.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		//Kich chuot vao button Search de tra
@@ -197,14 +200,10 @@ public class DemoScreen extends JFrame {
             }});
 		
 		
-		btnTra.setBounds(251, 60, 33, 32);
-		contentPane.add(btnTra);
-		
-		
-		JButton btnSpeak = new JButton("");
+		JButton btnSpeak = new JButton("Speak");
 		btnSpeak.setToolTipText("Press to speak");
-		btnSpeak.setForeground(Color.LIGHT_GRAY);
-		btnSpeak.setIcon(new ImageIcon("C:\\MyDictionary\\speechIcon.png"));
+		btnSpeak.setForeground(Color.BLACK);
+		btnSpeak.setIcon(new ImageIcon("speechIcon.png"));//C:\\MyDictionary\\speechIcon.png
 		
 		btnSpeak.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -219,11 +218,17 @@ public class DemoScreen extends JFrame {
 				}
 			}
 		});
+		btnSpeak.setBounds(653, 44, 129, 48);
+		contentPane.add(btnSpeak);
+		
+		
+		btnTra.setBounds(251, 60, 33, 32);
+		contentPane.add(btnTra);
 		
 		
 		
 		JButton btnAdd = new JButton("Advanced Dictionary");
-		btnAdd.setIcon(new ImageIcon("C:\\MyDictionary\\Icon-Advan.png"));
+		btnAdd.setIcon(new ImageIcon("Icon-Advan.png"));//C:\\MyDictionary\\Icon-Advan.png
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -233,8 +238,6 @@ public class DemoScreen extends JFrame {
 		});
 		btnAdd.setBounds(22, 602, 262, 38);
 		contentPane.add(btnAdd);
-		btnSpeak.setBounds(735, 48, 47, 44);
-		contentPane.add(btnSpeak);
 		////////////////////////////////////////
 		
 		
@@ -242,23 +245,108 @@ public class DemoScreen extends JFrame {
 		
 		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon("C:\\MyDictionary\\images1.jpg"));
+		label_1.setIcon(new ImageIcon("images1.jpg"));//C:\\MyDictionary\\images1.jpg
 		label_1.setBounds(0, 92, 311, 561);
 		contentPane.add(label_1);
 		
+		JLabel lblGreeting = new JLabel("-----Welcome!-----");
+		lblGreeting.setForeground(Color.WHITE);
+		lblGreeting.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblGreeting.setBounds(91, 0, 129, 25);
+		contentPane.add(lblGreeting);
 		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("a2.jpg"));//C:\\MyDictionary\\a2.jpg
+		label.setBounds(0, 0, 311, 92);
+		contentPane.add(label);
 		
+		JLabel lblVersion = new JLabel("version 1.3.1");
+		lblVersion.setForeground(Color.LIGHT_GRAY);
+		lblVersion.setBounds(311, 637, 83, 16);
+		contentPane.add(lblVersion);
 		
-		lblNewLabel.setIcon(new ImageIcon("C:\\MyDictionary\\a1.jpg"));
-		lblNewLabel.setForeground(SystemColor.activeCaption);
+		JButton btnResized = new JButton("Di\u0323ch v\u0103n ba\u0309n >>");
+		btnResized.setBounds(653, 0, 129, 44);
+		contentPane.add(btnResized);
+		
+		lblNewLabel.setIcon(new ImageIcon("a1.jpg"));//C:\\MyDictionary\\a1.jpg
+		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBounds(311, 0, 471, 92);
 		contentPane.add(lblNewLabel);
 		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\MyDictionary\\a2.jpg"));
-		label.setBounds(0, 0, 311, 92);
-		contentPane.add(label);
-	
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(794, 378, 376, 262);
+		contentPane.add(scrollPane_2);
+		
+		JTextArea meanDocument = new JTextArea();
+		meanDocument.setFont(new Font("Monospaced", Font.PLAIN, 15));
+		meanDocument.setEditable(false);
+		scrollPane_2.setViewportView(meanDocument);
+		
+		JComboBox selectLanguage = new JComboBox();
+		selectLanguage.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		selectLanguage.setModel(new DefaultComboBoxModel(new String[] {"vi", "en","fr","ja","bg","zh","id","it","ms","ru","th"}));
+		selectLanguage.setBounds(1091, 340, 79, 25);
+		contentPane.add(selectLanguage);
+		
+		JButton btnNewButton = new JButton("---- Di\u0323ch v\u0103n ba\u0309n --->");
+		
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnNewButton.setBounds(891, 340, 188, 25);
+		contentPane.add(btnNewButton);
+		
+		JTextArea txtrTransdocument = new JTextArea();
+		txtrTransdocument.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrTransdocument.setBounds(794, 94, 376, 233);
+		contentPane.add(txtrTransdocument);
+		
+		JButton btnReturn = new JButton("<< Thu la\u0323i");
+		btnResized.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnReturn.setVisible(true);
+				setBounds(100, 100, 1200, 700);
+			}
+		});
+		btnReturn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setBounds(100, 100, 800, 700);
+				btnResized.setVisible(true);
+			}
+		});
+		btnReturn.setBounds(1053, 0, 129, 45);
+		contentPane.add(btnReturn);
+		
+		JComboBox tranFrom = new JComboBox();
+		tranFrom.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tranFrom.setModel(new DefaultComboBoxModel(new String[] {"en", "vi","fr","ja","bg","zh","id","it","ms","ru","th"}));
+		tranFrom.setBounds(794, 340, 85, 25);
+		contentPane.add(tranFrom);
+		
+		JLabel lblGoogleicon = new JLabel("");
+		lblGoogleicon.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGoogleicon.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblGoogleicon.setIcon(new ImageIcon("google_translateIcon.gif"));//C:\\MyDictionary\\google_translateIcon.gif
+		lblGoogleicon.setBounds(1053, 44, 129, 48);
+		contentPane.add(lblGoogleicon);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setIcon(new ImageIcon("a2.jpg"));//C:\\MyDictionary\\a2.jpg
+		lblNewLabel_2.setBounds(769, 0, 413, 92);
+		contentPane.add(lblNewLabel_2);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					GG gg = new GG();
+					String tmp = gg.getMean((String)tranFrom.getSelectedItem(), (String)selectLanguage.getSelectedItem(), txtrTransdocument.getText());
+					meanDocument.setText(tmp);
+					//meanDocument.setText(GoogleTranslate.translate((String)tranFrom.getSelectedItem(),(String)selectLanguage.getSelectedItem(),txtrTransdocument.getText() ));
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 	
 		contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblNewLabel_1, textField1, textArea1, btnTra, lblNewLabel, label, label_1}));
 		

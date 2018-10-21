@@ -72,19 +72,11 @@ public class DictionaryManagement {
     //cai tien lan 1 - nhap file tu tao
     public void  insertFromFile() throws IOException{
         
-            File inFile = new File("C:\\Users\\Admin\\Desktop\\AnhVietdict.txt");
+            File inFile = new File("AnhVietdict.txt");//C://MyDictionary//AnhVietdict.txt
             FileInputStream fileTmp = new FileInputStream(inFile);
             BufferedReader reader = new BufferedReader(new InputStreamReader(fileTmp, "UTF8"));
-            reader.readLine();
-//            
+            reader.readLine();           
             String line;
-//            while ((line= reader.readLine()) !=null){
-//                String [] sepa= line.split("\t");
-//                Word word = new Word(sepa[0],sepa[1]);
-//                myDic.addNewWord(word);
-//            }
-//            reader.close();
-//            System.out.println("Open file complete!");
             ArrayList<String> target = new ArrayList<String>();
             ArrayList<String> explain = new ArrayList<String>();
          //   explain.add("");
@@ -113,66 +105,23 @@ public class DictionaryManagement {
                 word.setWord_explain(explain.get(j));
                 this.myDic.addNewWord(word);
             }
-            
-            
-            
-            
-        
     }
     
-    //nhap file tu file dien tu Ho Ngoc Duc
-//    public void insertFromFileHARD() throws IOException {
-//		String fileName = "dict";
-//		String content = new String(Files.readAllBytes(Paths.get(fileName)),StandardCharsets.UTF_8);
-//		int n = 0,m = 0;
-//		
-//		String a = new String();
-//		String b = new String();
-//		for(int i=0 ; i<content.length();i++)
-//		{
-//			if(content.charAt(i)=='@')
-//			{
-//				n=i+1;
-//			}
-//	
-//			if(content.charAt(i)==' '&&content.charAt(i+1)=='/')
-//			{
-//				m = i;
-//				a = (content.substring(n, m));
-//				//System.out.println(a);
-//			}
-//			if( content.charAt(i)=='\n' && content.charAt(i+1)=='@' ) {
-//				 b = content.substring(m,i);
-//				 //System.out.println(b);
-//				 	
-//			}
-//			
-//			Word tmp = new Word(a, b);
-//			this.myDic.addNewWord(tmp);
-//		}
-//	}
+    
  // xuất dữ liệu từ điển hiện tại ra files
 	public void dictionaryExportToFile() throws IOException {
-		File Fout = new File("dictionary.txt");
+		File Fout = new File("AnhVietdict.txt");
 		FileOutputStream fileTmp = new FileOutputStream(Fout);
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fileTmp, "UTF8"));
 		writer.write("");
 		
 		for(int i=0;i<this.myDic.size();i++) {
-			writer.write(this.myDic.getListWord().get(i).getWord_target() + "\t");
-			writer.write(this.myDic.getListWord().get(i).getWord_explain() + "\n");
+			writer.write(this.myDic.getListWord().get(i).getWord_target() + "\n");
+			writer.write(" " + this.myDic.getListWord().get(i).getWord_explain()  );
 		}
 	    writer.close();
 	}
 		
-		
-		
-         		
-
-    
-    
-    
-    
     
     //tra cuu phien ban so cap
     //----tra tu nhap lieu
@@ -272,7 +221,11 @@ public class DictionaryManagement {
     	System.out.println("Them tu thanh cong!");
     }
 
-	
+	public void DeleteWord(String word) {
+		int i = this.dictionaryLookup(word);
+		this.myDic.Delete(i);
+		this.SortDictionary();
+	}
     
     
 }

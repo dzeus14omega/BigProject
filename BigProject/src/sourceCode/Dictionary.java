@@ -34,5 +34,8 @@ public class Dictionary {
 		this.N = a;
 	}
 
-	
+	public void Delete(int index) {
+		this.listWord.remove(index);
+		this.N--;
+	}
 }

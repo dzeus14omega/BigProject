@@ -28,6 +28,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Component;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 public class AdvanceWindow extends JFrame{
 
@@ -63,27 +64,33 @@ public class AdvanceWindow extends JFrame{
 		JComboBox listAction = new JComboBox();
 		listAction.setBackground(new Color(153, 204, 204));
 		listAction.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		listAction.setModel(new DefaultComboBoxModel(new String[] {"Add Word", "Fix Word"}));
+		listAction.setModel(new DefaultComboBoxModel(new String[] {"Th\u00EAm t\u01B0\u0300", "S\u01B0\u0309a t\u01B0\u0300", "Xo\u0301a t\u01B0\u0300"}));
 		listAction.setSelectedIndex(0);
 		listAction.setBounds(31, 13, 302, 22);
 		pn.add(listAction);
 		
 		JEditorPane editMean = new JEditorPane();
+		editMean.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		editMean.setBackground(new Color(255, 255, 255));
 		editMean.setBounds(31, 128, 302, 202);
 		pn.add(editMean);
 		
+		JLabel lblDeletemes = new JLabel("Nh\u00E2\u0301n save \u0111\u00EA\u0309 xa\u0301c nh\u00E2\u0323n");
+		lblDeletemes.setVisible(false);
+		lblDeletemes.setForeground(Color.WHITE);
+		lblDeletemes.setBounds(319, 99, 150, 16);
+		pn.add(lblDeletemes);
+		
 		JLabel lblScriptTutorial = new JLabel("Nh\u00E2\u0323p nghi\u0303a c\u00E2\u0300n th\u00EAm");
 		lblScriptTutorial.setForeground(Color.WHITE);
 		lblScriptTutorial.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblScriptTutorial.setBounds(31, 96, 417, 31);
+		lblScriptTutorial.setBounds(31, 96, 251, 31);
 		pn.add(lblScriptTutorial);
 		
 		JLabel lblCheckScript = new JLabel("T\u01B0\u0300 \u0111a\u0303 co\u0301 trong t\u01B0\u0300 \u0111i\u00EA\u0309n!");
 		lblCheckScript.setForeground(new Color(255, 51, 0));
 		lblCheckScript.setVisible(false);
-		lblCheckScript.setIcon(new ImageIcon(AdvanceWindow.class.getResource("/com/sun/java/swing/plaf/windows/icons/Error.gif")));
 		lblCheckScript.setBounds(156, 67, 177, 16);
 		pn.add(lblCheckScript);
 		
@@ -91,7 +98,6 @@ public class AdvanceWindow extends JFrame{
 		lblRemindedScript.setVisible(false);
 		lblRemindedScript.setForeground(new Color(255, 51, 0));
 		lblRemindedScript.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		lblRemindedScript.setIcon(new ImageIcon(AdvanceWindow.class.getResource("/javax/swing/plaf/metal/icons/ocean/error.png")));
 		lblRemindedScript.setBounds(31, 336, 191, 16);
 		pn.add(lblRemindedScript);
 		JLabel lblMesout = new JLabel("Th\u00EAm t\u01B0\u0300 tha\u0300nh c\u00F4ng!");
@@ -117,7 +123,6 @@ public class AdvanceWindow extends JFrame{
 		JLabel lblcheckScript2 = new JLabel("T\u01B0\u0300 ch\u01B0a co\u0301 trong t\u01B0\u0300 \u0111i\u00EA\u0309n!");
 		lblcheckScript2.setVisible(false);
 		lblcheckScript2.setForeground(Color.RED);
-		lblcheckScript2.setIcon(new ImageIcon(AdvanceWindow.class.getResource("/com/sun/java/swing/plaf/windows/icons/Error.gif")));
 		lblcheckScript2.setBounds(156, 67, 191, 16);
 		pn.add(lblcheckScript2);
 		
@@ -137,6 +142,7 @@ public class AdvanceWindow extends JFrame{
 				lblCheckScript.setVisible(false);//-----------|
 				lblRemindedScript.setVisible(false);//--------|
 				/*btnSave.setVisible(false);//---------------*/
+				lblDeletemes.setVisible(false);//-------------|
 				lblcheckScript2.setVisible(false);//----------|
 				lblMesout.setVisible(false);//----------------|
 				lblMesFix.setVisible(false);//----------------|
@@ -151,12 +157,35 @@ public class AdvanceWindow extends JFrame{
 					dataDict.dictionaryAdd(word, mean);
 					lblMesout.setVisible(true);
 					btnSave.setVisible(false);
+					try {
+						dataDict.dictionaryExportToFile();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					return;
 				}
 				if(listAction.getSelectedIndex()==1) {
 					dataDict.rePlaceVWord(mainTxt.getText(), editMean.getText());
 					lblMesFix.setVisible(true);
 					btnSave.setVisible(false);
+					try {
+						dataDict.dictionaryExportToFile();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				if(listAction.getSelectedIndex()==2) {
+					dataDict.DeleteWord(mainTxt.getText());
+					lblDeletemes.setVisible(false);
+					btnSave.setVisible(false);
+					try {
+						dataDict.dictionaryExportToFile();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		});
@@ -173,6 +202,7 @@ public class AdvanceWindow extends JFrame{
 				lblCheckScript.setVisible(false);//-----------|
 				btnSave.setVisible(false);//------------------|
 				lblcheckScript2.setVisible(false);//----------|
+				lblDeletemes.setVisible(false);//-------------|
 				lblRemindedScript.setVisible(false);//--------|
 				lblMesFix.setVisible(false);//----------------|
 				lblMesout.setVisible(false);//----------------|
@@ -200,6 +230,16 @@ public class AdvanceWindow extends JFrame{
 						return;
 					}
 				}
+				if(listAction.getSelectedIndex()==2) {
+					int n= dataDict.dictionaryLookup(tmp);
+					if(n==-1) {
+						lblcheckScript2.setVisible(true);
+						return;
+					} else {
+						btnSave.setVisible(true);
+						lblDeletemes.setVisible(true);
+					}
+				}
 			}
 		});
 		mainTxt.addKeyListener(new KeyAdapter() {
@@ -208,6 +248,7 @@ public class AdvanceWindow extends JFrame{
 				//Default settup------------------------------//
 				lblCheckScript.setVisible(false);//-----------|
 				lblcheckScript2.setVisible(false);//----------|
+				lblDeletemes.setVisible(false);//-------------|
 				lblMesFix.setVisible(false);//----------------|
 				lblRemindedScript.setVisible(false);//--------|
 				lblMesout.setVisible(false);//----------------|
@@ -220,6 +261,7 @@ public class AdvanceWindow extends JFrame{
 			public void keyPressed(KeyEvent e) {
 				//Default settup------------------------------//
 				lblCheckScript.setVisible(false);//-----------|
+				lblDeletemes.setVisible(false);//-------------|
 				lblcheckScript2.setVisible(false);//----------|
 				lblMesFix.setVisible(false);//----------------|
 				lblRemindedScript.setVisible(false);//--------|
